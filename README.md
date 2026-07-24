@@ -13,4 +13,4 @@ A modular rebirth system created in Roblox Luau.
 - Luau
 
 ## Author
-GitHub: YourUsername
+GitHub: snoopcattiee
