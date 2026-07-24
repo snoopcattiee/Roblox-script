@@ -1,0 +1,39 @@
+-- RebirthService.lua
+-- Handles player rebirths using leaderstats.
+
+local RebirthService = {}
+
+local REBIRTH_COST = 100000
+local COIN_NAME = "Coins"
+local REBIRTH_NAME = "Rebirths"
+
+function RebirthService:CanRebirth(player)
+	local leaderstats = player:FindFirstChild("leaderstats")
+	if not leaderstats then
+		return false
+	end
+
+	local coins = leaderstats:FindFirstChild(COIN_NAME)
+	if not coins then
+		return false
+	end
+
+	return coins.Value >= REBIRTH_COST
+end
+
+function RebirthService:PerformRebirth(player)
+	if not self:CanRebirth(player) then
+		return false, "Not enough coins."
+	end
+
+	local leaderstats = player:FindFirstChild("leaderstats")
+	local coins = leaderstats:FindFirstChild(COIN_NAME)
+	local rebirths = leaderstats:FindFirstChild(REBIRTH_NAME)
+
+	coins.Value = 0
+	rebirths.Value += 1
+
+	return true
+end
+
+return RebirthService
